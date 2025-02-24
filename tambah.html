@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Tambah Guru</title>
+</head>
+<style>
+  /* Styling Umum */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    color: #333;
+}
+
+/* Form */
+form {
+    background: white;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Label */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Input dan Select */
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Tombol Simpan */
+button {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Tombol Kembali */
+a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+</style>
+<body>
+
+<h1>Tambah Guru</h1>
+<form th:action="@{/admin/guru/simpan}" th:object="${guru}" method="post" enctype="multipart/form-data">
+  <label>Nama:</label>
+  <input type="text" th:field="*{nama}" required><br>
+
+  <label>NIP:</label>
+  <input type="text" th:field="*{nip}" required><br>
+
+  <label>Tempat, Tanggal Lahir:</label>
+  <input type="text" th:field="*{ttl}" required><br>
+
+  <label>Jenis Kelamin:</label>
+  <select th:field="*{jenisKelamin}">
+    <option value="Laki-laki">Laki-laki</option>
+    <option value="Perempuan">Perempuan</option>
+  </select><br>
+
+  <label>Agama:</label>
+  <input type="text" th:field="*{agama}" required><br>
+
+  <label>Pangkat/Golongan:</label>
+  <input type="text" th:field="*{pangkat}" required><br>
+
+  <label>Jabatan:</label>
+  <input type="text" th:field="*{jabatan}" required><br>
+
+  <label>Posisi:</label>
+  <input type="text" th:field="*{posisi}" required><br>
+
+  <label>Upload Foto:</label>
+  <input type="file" name="fotoGuru" accept="image/*" required><br>
+
+  <button type="submit">Simpan</button>
+
+</form>
+<a th:href="@{/admin-panel}" class="back-btn">Kembali</a>
+
+</body>
+</html>
