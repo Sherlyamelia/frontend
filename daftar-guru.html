@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daftar Guru</title>
+    <link rel="stylesheet" href="/daftar-guru.css">
+</head>
+<style>
+    /* Styling umum */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Tombol Tambah Guru */
+a.add-btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+a.add-btn:hover {
+    background-color: #218838;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Baris bergaris */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Aksi (Edit & Hapus) */
+td a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+}
+
+td a:first-child {
+    background-color: #ffc107; /* Warna kuning untuk Edit */
+}
+td a:first-child:hover {
+    background-color: #e0a800;
+}
+
+td a:last-child {
+    background-color: #dc3545; /* Warna merah untuk Hapus */
+}
+td a:last-child:hover {
+    background-color: #c82333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+</style>
+<body>
+
+<h1>Daftar Guru</h1>
+<a th:href="@{/admin-panel}" class="add-btn">Kembali</a>
+<a th:href="@{/admin/guru/tambah}" class="add-btn">Tambah Guru</a>
+<table border="1">
+    <tr>
+        <th>Nama</th>
+        <th>NIP</th>
+        <th>Position</th>
+        <th>Foto</th>
+        <th>Aksi</th>
+    </tr>
+    <tr th:each="guru : ${guruList}">
+        <td th:text="${guru.nama}"></td>
+        <td th:text="${guru.nip}"></td>
+        <td th:text="${guru.posisi}"></td>
+        <td>
+            <img th:src="@{'/img/guru/' + ${guru.foto} + '?v=' + ${#dates.createNow().getTime()}}" alt="Foto Guru" width="100">
+        </td>
+        <td>
+            <a th:href="@{/admin/guru/edit/{id}(id=${guru.id})}">Edit</a>
+            <a th:href="@{/admin/guru/hapus/{id}(id=${guru.id})}" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
